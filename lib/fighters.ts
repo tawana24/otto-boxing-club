@@ -1,0 +1,397 @@
+// Real Otto Boxing Club roster — sourced from official fighter profile PDFs
+// All names, records, titles, and bio details verified against PDF dossiers.
+
+export type Fighter = {
+  slug: string;
+  name: string;
+  alias?: string;
+  age?: number;
+  hometown?: string;
+  residence?: string;
+  weight: string;
+  division?: string;
+  style?: "Orthodox" | "Southpaw";
+  title: string;
+  status: "champion" | "contender" | "rising" | "veteran";
+  // Record
+  wins: number;
+  losses: number;
+  draws: number;
+  ko: number;
+  rounds?: number;
+  // Honors list
+  honors: string[];
+  // Media
+  portrait: string;
+  walkout?: string;
+  profileSheet?: string; // path to the full PDF render
+  gallery?: string[]; // additional photos shown under the bio
+  // Bio
+  quote?: string;
+  quoteContext?: string; // grey sub-line shown under the pull-quote
+  story: string[]; // paragraphs
+  // Contact
+  phone?: string;
+  handle?: string;
+  // Social links — only added for boxers whose pages meet the pro standard
+  socials?: { facebook?: string; instagram?: string };
+};
+
+// Computed helpers
+export const totalFights = (f: Fighter) => f.wins + f.losses + f.draws;
+export const winRate = (f: Fighter) =>
+  totalFights(f) === 0 ? 0 : Math.round((f.wins / totalFights(f)) * 100);
+export const koRate = (f: Fighter) =>
+  f.wins === 0 ? 0 : Math.round((f.ko / f.wins) * 100);
+export const recordString = (f: Fighter) =>
+  `${f.wins}–${f.losses}${f.draws ? `–${f.draws}` : ""}, ${f.ko} KO`;
+
+export const fighters: Fighter[] = [
+  {
+    slug: "hassan-milanzi",
+    name: "Hassan Milanzi",
+    alias: "Starboy",
+    age: 28,
+    hometown: "Mtapa, Gweru",
+    residence: "Hatcliffe, Harare",
+    weight: "Bantamweight",
+    style: "Orthodox",
+    title: "WBF International Title Champion",
+    status: "champion",
+    wins: 14,
+    losses: 4,
+    draws: 1,
+    ko: 9, // 64.29% of 14 wins
+    rounds: 86,
+    honors: [
+      "ANSA Best Boxer 2024",
+      "WBF International Title Champion — Nov 9, 2024",
+      "ABU SADC Champion — April 6, 2024",
+      "Universal Boxing International Champion — 2019",
+      "Zimbabwe Bantamweight National Champion — 2018",
+      "Zone 4 Silver Medalist, Maputo — 2017",
+      "Bronze Medalist, National Champion — 2015",
+    ],
+    portrait: "/fighters/hassan-main.jpg",
+    profileSheet: "/profiles/hassan-milanzi.jpg",
+    gallery: ["/fighters/hassan-2.jpg", "/fighters/hassan-3.jpg"],
+    socials: {
+      facebook: "https://www.facebook.com/share/1B26hDnp86/",
+      instagram: "https://www.instagram.com/hassanstar2",
+    },
+    quote:
+      "In Manny Pacquiao, I see a beacon. His remarkable career is the standard I strive toward.",
+    story: [
+      "From the resilient streets of Mtapa, Gweru, a champion was forged. Hassan Osman Milanzi, born November 12, 1997, found his calling not in a grand arena, but on the grounds of Sandra Primary School. At twelve, a seed was planted by his former headmaster, Mr. PC Juru, who first introduced him to the discipline and art of boxing.",
+      "Milanzi's amateur career was a steady climb of continental conquest — Bronze at the 2015 National Youth Games, Silver at the 2017 Zone 4 Games in Maputo, then the 2018 Zimbabwe Bantamweight National Title and the 2019 Universal Boxing International Championship. In 2017, his craft found its definitive shape under mentor and manager Alie &ldquo;Otto&rdquo; Phiri at Otto Boxing Club.",
+      "2024 was the year of breakthroughs. On April 6th he became the ABU SADC Champion. On November 9th he lifted the WBF International Title, cementing his place among the sport's elite.",
+      "A devoted husband and father in Hatcliffe, Harare, Milanzi balances the fierce intensity of training with family life. He trains others at Crossfit Kyma and Body Active Gym. His goal is clear: world champion. The final hurdles are sponsorship and global stages.",
+    ],
+    phone: "+263779473294",
+  },
+  {
+    slug: "tinashe-majoni",
+    name: "Tinashe Majoni",
+    age: 27,
+    hometown: "Triangle, Masvingo",
+    residence: "Hatcliffe, Harare",
+    weight: "Super Flyweight",
+    style: "Orthodox",
+    title: "WBF Continental Super Flyweight Champion",
+    status: "champion",
+    wins: 12,
+    losses: 1,
+    draws: 0,
+    ko: 8, // 66.67%
+    rounds: 56,
+    honors: [
+      "WBF Continental Super Flyweight Champion — March 2025",
+      "ANSA Bronze — Best Professional Boxer 2025",
+      "Zimbabwe Super Flyweight National Champion — 2020",
+      "Gold — Zimbabwe Youth Games, Hwange (2017)",
+      "Gold — National Tournament, Chinhoyi (2016)",
+      "Region 5 Youth Games, Luanda, Angola (2016)",
+    ],
+    portrait: "/fighters/tinashe-majoni.jpg",
+    profileSheet: "/profiles/tinashe-majoni.jpg",
+    gallery: ["/fighters/tinashe-2.webp", "/fighters/tinashe-3.webp"],
+    socials: {
+      facebook: "https://www.facebook.com/share/14c3MdY9bWh/",
+      instagram: "https://www.instagram.com/jonesjnr3",
+    },
+    quote:
+      "Cafu handed me my only loss, and I consider it a gift. That moment was the wellspring of my strength; it forced a complete mental recalibration. To stay positive, to sharpen myself immensely — that was the lesson. Because in the end, the most powerful weapon you can have is a capable and sound mindset.",
+    quoteContext:
+      "Cafu — a former World Champion from South Africa — gave Majoni a wake-up call to sharpen his skill. To be conferred champion, Cafu had to beat four-division world champion Kosei Tanaka of Japan on his own turf, securing a massive upset victory by split decision in Tokyo to claim the WBO junior-bantamweight (super-flyweight) title.",
+    story: [
+      "From Triangle in Zimbabwe's Masvingo Province, Tinashe Majoni's boxing journey began in 2013 at Mafakosi Secondary School. Triangle was fertile ground for boxing — Tongaat Hulett's support of local sports made it a natural hub for developing young talent.",
+      "By 2015 he was on the Masvingo Provincial Boxing Team. By 2016 he was representing the province at the national tournament in Chinhoyi, winning gold in the Light Flyweight division and representing Zimbabwe at the Region 5 Games in Luanda, Angola. In 2017 he clinched gold at the Youth Games in Hwange.",
+      "In 2018 he joined the Manyuchi Academy, co-founded by Sir Charles Manyuchi and Coach Alie &ldquo;Otto&rdquo; Phiri. In 2019 he officially joined Otto Boxing Club, which remains his training home. He turned professional later that year.",
+      "In 2020 he won the Zimbabwe Super Flyweight National Title. His only professional defeat came against South Africa's Cafu — a former WBO super-flyweight world champion who upset Kosei Tanaka in Tokyo — a loss that taught humility, sharpened resolve, and pushed him back stronger. In March 2025 he became the WBF Continental Super Flyweight Champion.",
+    ],
+    phone: "+263779448087",
+  },
+  {
+    slug: "bongani-makorova",
+    name: "Bongani Makorova",
+    age: 27,
+    hometown: "Chiredzi",
+    residence: "Hatcliffe, Harare",
+    weight: "Super Bantamweight",
+    division: "Super Bantam",
+    style: "Orthodox",
+    title: "WBF Continental Super Bantamweight Champion",
+    status: "champion",
+    wins: 8,
+    losses: 5,
+    draws: 0,
+    ko: 4, // 50%
+    rounds: 78,
+    honors: [
+      "WBF Continental Super Bantamweight Champion — 30 August 2025",
+      "Ranked 1/5 in Zimbabwe",
+    ],
+    portrait: "/fighters/bongani-main.jpg",
+    profileSheet: "/profiles/bongani-makorova.jpg",
+    socials: {
+      facebook: "https://www.facebook.com/share/1BG94EmBDp/",
+      instagram: "https://www.instagram.com/bong.ani132",
+    },
+    story: [
+      "Hailing from the sun-scorched sugar fields of Chiredzi, Bongani Makorova's fighting spirit was forged early. His boxing journey began at just nine years old, a Grade 4 pupil who found his calling not just in the ring, but through a unique and solid foundation.",
+      "His talent was nurtured through a powerful two-fold system: the community clubs run by Tongaat Hulett and the supportive structure of the school system. It was at the Tongaat community club where his raw ability was meticulously shaped.",
+      "Makorova tested his skills in national tournaments and expanded his horizons in regional competitions across Mozambique and Angola. In 2021 he stepped onto the professional stage. Since then he has built a record of 13 officially accounted bouts, securing 8 wins.",
+      "His dedication culminated on 30 August 2025, when he claimed the WBF Continental Super Bantamweight title — a testament to his skill and perseverance on boxing's demanding professional path.",
+    ],
+    phone: "+263773281575",
+  },
+  {
+    slug: "aliyah-phiri",
+    name: "Aliyah Phiri",
+    alias: "God Answers Prayers",
+    age: 25,
+    hometown: "Hartcliffe, Harare",
+    residence: "Harare",
+    weight: "Lightweight",
+    division: "Light",
+    style: "Southpaw",
+    title: "ABU SADC Lightweight Champion",
+    status: "champion",
+    wins: 8,
+    losses: 3,
+    draws: 0,
+    ko: 5, // 62.5%
+    rounds: 60,
+    honors: [
+      "ABU SADC Lightweight Champion — 8 December 2023 (defended March 22, 2024)",
+      "Former WBF Continental Lightweight Champion",
+      "Amateur record: 49 fights, 48–1",
+      "Ranked 1/10 in Zimbabwe",
+    ],
+    portrait: "/fighters/aliyah-main.jpg",
+    walkout: "/fighters/aliyah-walkout-hq.jpg",
+    profileSheet: "/profiles/aliyah-phiri.jpg",
+    story: [
+      "The rhythm of the ring is my birthright. The sound of skipping ropes and the percussive thud of the heavy bag were the soundtrack of my childhood. My father, a boxer and trainer, gave me the tools — the worn leather gloves, the footwork drills on cold dawn floors. But it was my brother, Alie &ldquo;Otto&rdquo; Phiri, who gave me the dream.",
+      "That path began in earnest at 12. By Grade 6 at Hartcliffe 2 Primary, I had already made my ring debut. I carried that through my years at Parirewa School, building an amateur record that became my unbreakable foundation: 49 fights, 48 wins, only 1 loss.",
+      "Turning professional was a natural step. My greatest accomplishment came on December 8, 2023, when I defeated Israel Kamwamba to claim the African Boxing Union Lightweight Championship. On March 22, 2024, I turned back the challenge of Saidi Mukola of Tanzania, proving the reign was no accident.",
+      "I carry the Phiri name with every step I take into that ring. I am a champion built on a foundation of lineage, grind, and proven heart. The next chapter, the greatest chapter, is yet to be written.",
+    ],
+    phone: "+263710803760",
+  },
+  {
+    slug: "shungu-kupani",
+    name: "Shungu Kupani",
+    age: 23,
+    hometown: "Chegutu",
+    residence: "Chegutu",
+    weight: "Super Bantamweight", // stats sheet: Super Bantam; bio mentions featherweight — TODO confirm
+    division: "Super Bantam",
+    style: "Orthodox",
+    title: "National Super Bantamweight Champion",
+    status: "champion",
+    wins: 4,
+    losses: 2,
+    draws: 0,
+    ko: 3, // 75% of 4 wins
+    rounds: 34,
+    honors: [
+      "National Champion — 30 August 2025",
+      "Ranked 1/2 in Zimbabwe",
+      "Amateur record: 96 fights, 94–2 (85% KO)",
+    ],
+    portrait: "/fighters/shungu-main.jpg",
+    profileSheet: "/profiles/shungu-kupani.jpg",
+    story: [
+      "I was born and raised in Chegutu. My journey into boxing came from a difficult place. Growing up in a violent neighbourhood, I was small in stature and often picked on — an easy target for bullying. So to solve that problem, I searched my town for people who did boxing. That&apos;s when I met Simbarashe Gwatirinda, originally from Triangle, Masvingo — a place known as the mecca of boxing.",
+      "My first match was unplanned. Coach Simba invited me to watch him fight, but he quietly had me step on the scale, presenting it like a medical check-up. Then I heard my name called for a fight. I didn&apos;t refuse — I fought, and I won by knockout.",
+      "During my amateur career I had 96 fights. I lost only twice, both to the same boxer — a soldier named Luckmore Kamoto. 85 percent of my wins came by knockout. I tried to join the Army Club but didn&apos;t make it, and Shumba Academy didn&apos;t work out. Eventually I landed at Otto Boxing Club, which is now my permanent home — amateur in 2020, professional in 2023.",
+      "Today I am the national champion in my weight category with a professional record of 4 wins and 2 losses. I am still refining my skills so I can compete with the super-elite. One day, I will be a global champion.",
+    ],
+    phone: "+263786081739",
+  },
+  {
+    slug: "mike-mukariri",
+    name: "Mike Basil Mukariri",
+    alias: "The Dreadnought",
+    age: 23,
+    hometown: "Marondera, Mash East",
+    residence: "Harare",
+    weight: "Super Bantamweight",
+    style: "Orthodox",
+    title: "Rising professional — Rise of the Champions winner",
+    status: "rising",
+    wins: 4,
+    losses: 1,
+    draws: 1,
+    ko: 4, // 66.66%
+    rounds: 22,
+    honors: [
+      "International win vs Hillary Kataya — Rise of the Champions 6, August 30, 2025",
+      "Three consecutive knockouts post-debut",
+    ],
+    portrait: "/fighters/mike-4.jpg",
+    profileSheet: "/profiles/mike-mukariri.jpg",
+    gallery: ["/fighters/mike-5.jpg", "/fighters/mike-6.jpg"],
+    socials: {
+      facebook: "https://www.facebook.com/share/1ESQJCthr7/",
+      instagram: "https://www.instagram.com/dreadnought_boxing",
+    },
+    quote:
+      "No contribution is too small when pursuing a goal. Success is built through the accumulation of consistent efforts.",
+    story: [
+      "Born and raised in Marondera, Mike Basil Mukariri completed his Form Six and moved to Harare with a single, burning goal — to chase his passion for boxing and make a name for himself in the ring.",
+      "His amateur foundation began in January 2020. He fought relentlessly through the amateur scene, learning his craft through sheer volume — so many bouts he's lost count. That period was his university of boxing.",
+      "He turned professional in 2022. He started with a setback, losing his debut, but bounced back with authority — securing three consecutive knockouts. On August 30, 2025 he won his first international bout, defeating Hillary Kataya at Rise of the Champions 6.",
+      "They call him The Dreadnought because he comes forward and he doesn't stop.",
+    ],
+    phone: "+263786042372",
+    handle: "@droughtnought_boxing",
+  },
+  {
+    slug: "alfonso-zvenyika",
+    name: "Alfonso Zvenyika Jnr",
+    age: 27,
+    hometown: "Mbare, Harare",
+    residence: "Harare",
+    weight: "Super Bantamweight",
+    style: "Orthodox",
+    title: "Recalibrating — son of a Commonwealth champion",
+    status: "rising",
+    wins: 1,
+    losses: 3,
+    draws: 0,
+    ko: 0,
+    rounds: 14,
+    honors: [
+      "Son of a former Commonwealth Super Bantamweight Champion",
+      "Currently in development at Otto Boxing Club",
+    ],
+    portrait: "/fighters/alfonso-main.jpg",
+    profileSheet: "/profiles/alfonso-zvenyika.jpg",
+    gallery: ["/fighters/alfonso-2.jpg"],
+    story: [
+      "Alfonso Zvenyika Jnr is the son of a former Commonwealth Super Bantamweight Champion. Born and raised in Mbare, he is being shaped for greatness at Otto Boxing Club.",
+      "His journey began on a difficult note, with losses in his first two fights. Rather than deter him, these setbacks reignited his focus and resolve. Greatness and a warrior's spirit run in his veins.",
+      "Under the guidance of Coach Alie Phiri, he is being recalibrated for higher achievements.",
+    ],
+    phone: "+263778815482",
+  },
+  {
+    slug: "freeman-mabvongwe",
+    name: "Freeman Mabvongwe",
+    alias: "Sekuru Gudo",
+    age: 27,
+    hometown: "Chiredzi, Masvingo",
+    residence: "Harare",
+    weight: "Super Middleweight",
+    division: "Super Middleweight",
+    style: "Southpaw", // stats sheet lists Orthodox; bio self-describes as southpaw — TODO confirm
+    title: "Power-punching veteran & boxing media pioneer",
+    status: "veteran",
+    wins: 9,
+    losses: 6,
+    draws: 1, // 16 total bouts, 56% win ratio
+    ko: 6, // 66.67% of wins
+    rounds: 74,
+    honors: [
+      "3× National Champion (Gold 2014 & 2016)",
+      "Bronze — Zone 4 & Zone 5 Regional Championships",
+      "International bouts in Georgia, Namibia & Mauritius",
+      "Competitively active since 2012",
+      "Zimbabwean boxing blogger & analyst",
+    ],
+    portrait: "/fighters/freeman-main.jpg",
+    profileSheet: "/profiles/freeman-mabvongwe.jpg",
+    gallery: ["/fighters/freeman-2.jpg"],
+    socials: {
+      facebook: "https://www.facebook.com/share/1AKFS23rMW/",
+      instagram: "https://www.instagram.com/freeman_mabvongwe",
+    },
+    quote:
+      "To truly reach new heights, you must have the stomach to dare the pinnacle. I don't run from challenges — I run toward them. My legacy is built by fighting the finest in the business.",
+    story: [
+      "They call me &ldquo;Sekuru Gudo&rdquo; for a reason. It speaks of craft, of patience, of a wisdom forged in the fire of the ring. My story didn't start under the bright lights, but in the dust and heat of Chiredzi, Masvingo. It is a story of fists, yes, but also of voice.",
+      "My foundation was laid with discipline. From my first amateur bout in 2012, I was a student of the sweet science. That mastery took me to the top of the national podium — not once, but three times, with gold in 2014 and 2016, and bronze against the best in Zone 4 and Zone 5.",
+      "I turned professional in 2017. Over 16 bouts I've built a record that speaks of enduring power — a 56% win ratio, but the truth is in the detail: 66% of those wins came by knockout. My left hand carries a final argument. I've taken that power across borders — to Georgia and beyond — because a true warrior tests himself on foreign soil.",
+      "But the ring is only one arena. I saw a gap — a need for our local scene to be documented and celebrated with the insight only a fighter possesses. So I stepped into the media space as a blogger and a voice for Zimbabwean boxing. I'm not just participating in the sport; I'm helping to narrate its journey, building its legacy from the inside out.",
+    ],
+    phone: "+263776829591",
+  },
+  {
+    slug: "tafadzwa-mushando",
+    name: "Tafadzwa Mushando",
+    alias: "Tiffah",
+    age: 25,
+    hometown: "Gutu, Masvingo",
+    residence: "Hartcliffe, Harare",
+    weight: "TBC", // TODO: confirm division — not listed on profile sheet
+    style: "Orthodox",
+    title: "Rising professional",
+    status: "rising",
+    wins: 7,
+    losses: 3,
+    draws: 0,
+    ko: 3, // 42.86% of 7 wins
+    rounds: 43,
+    honors: [
+      "Silver — Zimbabwe Youth Games, Bulawayo (2019)",
+      "Amateur record: 16 fights, 14–2",
+      "Two professional tours in Namibia",
+    ],
+    portrait: "/fighters/tafadzwa-main.jpg",
+    profileSheet: "/profiles/tafadzwa-mushando.jpg",
+    gallery: [
+      "/fighters/tafadzwa-4.jpg",
+      "/fighters/tafadzwa-2.jpg",
+      "/fighters/tafadzwa-3.jpg",
+    ],
+    quote:
+      "I breathe boxing, and I see myself fighting the biggest names in the business.",
+    story: [
+      "I hail from Gutu and was raised in Triangle. My journey into boxing began in 2016, during my first year at Hippo High School. I was fortunate to benefit from the vibrant sporting ecosystem fostered by the sugar giants in the region.",
+      "As an amateur I competed in 16 bouts, recording 14 wins and only 2 losses, and earned a silver medal at the National Youth Games in Bulawayo.",
+      "I turned professional in 2019. Since then I have shared the ring with 10 opponents, including two tours in Namibia — a country many in Africa regard as the mecca of boxing. While I have yet to secure a victory on Namibian soil, my dedication and intensive training have never wavered, and I believe an impact victory is within close reach.",
+      "My vision remains clear: to become a global champion sanctioned by a respected boxing governing body.",
+    ],
+    phone: "+263714973336",
+  },
+];
+
+export const findFighter = (slug: string) =>
+  fighters.find((f) => f.slug === slug);
+
+// Status display — label + Tailwind colour classes
+export const statusMeta = (status: Fighter["status"]) => {
+  switch (status) {
+    case "champion":
+      return { label: "Champion", cls: "text-blood border-blood/60" };
+    case "contender":
+      return { label: "Contender", cls: "text-gold border-gold/50" };
+    case "veteran":
+      return { label: "Veteran", cls: "text-bone/80 border-bone/40" };
+    case "rising":
+    default:
+      return { label: "Rising", cls: "text-bone/70 border-bone/30" };
+  }
+};

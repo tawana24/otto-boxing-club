@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #0a0a0a;
+  --bone: #f2ede3;
+  --blood: #b8252c;
+  --gold: #c9a961;
+  --grey-card: #161616;
+  --grey-line: #2a2a2a;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchored sections so the fixed nav (h-16) doesn't overlap headings */
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
+  background: var(--black);
+  color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--blood);
+  color: var(--bone);
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Condensed display headline defaults */
+.display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-family: var(--font-display), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+/* Film grain overlay (applied to a positioned parent) */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+/* Thin oxblood section divider */
+.section-divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(184, 37, 44, 0.55),
+    transparent
+  );
+  height: 1px;
+  border: 0;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.7rem;
+  background: var(--blood);
+  color: var(--bone);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #c0271f;
+  box-shadow: 0 0 0 4px rgba(184, 37, 44, 0.18);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.7rem;
+  background: transparent;
+  color: var(--bone);
+  border: 1px solid rgba(242, 237, 227, 0.4);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  border-color: var(--bone);
+  background: rgba(242, 237, 227, 0.05);
+}
+
+/* Card with oxblood hover */
+.card {
+  position: relative;
+  overflow: hidden;
+  background: var(--grey-card);
+  border: 1px solid var(--grey-line);
+  border-radius: 4px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card-hover:hover {
+  border-color: var(--blood);
+  box-shadow:
+    0 0 0 1px var(--blood),
+    0 25px 60px -25px rgba(184, 37, 44, 0.4);
+}
+
+.card-hover img {
+  transition:
+    filter 0.5s ease,
+    transform 0.7s ease;
+}
+
+.card-hover:hover img {
+  filter: saturate(0.55) contrast(1.05);
+  transform: scale(1.03);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
