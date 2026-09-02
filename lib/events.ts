@@ -1,7 +1,9 @@
-// Otto Boxing Club — events / tournaments
-// No event is currently scheduled. When Otto announces a tournament,
-// add it to the `events` array below and the countdown + ticketing
-// automatically go live across the site.
+// Otto Boxing Club — events / tournaments.
+// The DATA lives in the CMS: editing events in /keystatic writes to
+// content/events/index.json, imported below. When no event has a future
+// (or TBA) date, the site automatically shows its "no tournament scheduled"
+// state — nothing to remove by hand when a fight night passes.
+import eventsDoc from "@/content/events/index.json";
 
 export type EventStatus = "announced" | "tickets-open" | "sold-out" | "past";
 
@@ -25,38 +27,7 @@ export type OttoEvent = {
   blurb: string;
 };
 
-// ── No tournament currently scheduled ──
-// To announce one, add an object here, e.g.:
-// {
-//   slug: "rise-of-the-champions-7",
-//   series: "Rise of the Champions",
-//   title: "Rise of the Champions VII",
-//   date: "2026-09-13T19:00:00+02:00",
-//   venue: "HICC", city: "Harare",
-//   status: "tickets-open",
-//   card: [{ bout: "Hassan Milanzi vs. TBA", detail: "WBF International defence" }],
-//   blurb: "Otto's flagship fight night.",
-// }
-export const events: OttoEvent[] = [
-  {
-    slug: "zvenyika-vs-moffat",
-    series: "ROYGRI Boxing Promotions × Lighthouse College of Technology",
-    title: "Zvenyika vs Moffat — National Featherweight Title",
-    date: "2026-06-13T18:00:00+02:00", // 13 June 2026; first-bell time approx — TODO confirm
-    venue: "Baradzanwa Cultural Village",
-    status: "tickets-open",
-    poster: "/events/zvenyika-vs-moffat.jpg",
-    ticketPhone: "0774 601 820 / 0718 957 325",
-    card: [
-      {
-        bout: 'Alfonso "Zvedza Jnr" Zvenyika vs Mike "Iron Heart" Moffat',
-        detail: "Zimbabwe National Featherweight Title · 10 rounds",
-      },
-    ],
-    blurb:
-      "Otto's Alfonso Zvenyika Jnr challenges for the Zimbabwe National Featherweight Title. Presented by ROYGRI Boxing Promotions in conjunction with Lighthouse College of Technology — under the banner of empowering women & girls and fighting drug & substance abuse.",
-  },
-];
+export const events = eventsDoc.list as unknown as OttoEvent[];
 
 // The recurring series Otto stages (shown even when no date is set)
 export const series = [

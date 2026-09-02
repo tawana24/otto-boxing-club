@@ -1,0 +1,21 @@
+{
+  "list": [
+    {
+      "slug": "zvenyika-vs-moffat",
+      "series": "ROYGRI Boxing Promotions × Lighthouse College of Technology",
+      "title": "Zvenyika vs Moffat — National Featherweight Title",
+      "date": "2026-06-13T18:00:00+02:00",
+      "venue": "Baradzanwa Cultural Village",
+      "status": "tickets-open",
+      "poster": "/events/zvenyika-vs-moffat.jpg",
+      "ticketPhone": "0774 601 820 / 0718 957 325",
+      "card": [
+        {
+          "bout": "Alfonso \"Zvedza Jnr\" Zvenyika vs Mike \"Iron Heart\" Moffat",
+          "detail": "Zimbabwe National Featherweight Title · 10 rounds"
+        }
+      ],
+      "blurb": "Otto's Alfonso Zvenyika Jnr challenges for the Zimbabwe National Featherweight Title. Presented by ROYGRI Boxing Promotions in conjunction with Lighthouse College of Technology — under the banner of empowering women & girls and fighting drug & substance abuse."
+    }
+  ]
+}
