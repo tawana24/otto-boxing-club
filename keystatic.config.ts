@@ -14,7 +14,11 @@ import { config, fields, singleton } from "@keystatic/core";
 // ─────────────────────────────────────────────────────────────────────────
 
 export default config({
-  storage: { kind: "local" },
+  // Keystatic Cloud handles the editor login and syncs every save to the
+  // GitHub repo (tawana24/otto-boxing-club), which Vercel auto-deploys — so
+  // saving in /keystatic updates the live site. Project set up at keystatic.cloud.
+  storage: { kind: "cloud" },
+  cloud: { project: "otto/otto-boxing-club" },
   ui: {
     brand: { name: "Otto Boxing Club" },
   },
